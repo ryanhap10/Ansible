@@ -1,0 +1,23 @@
+---
+
+- name: Installing
+  yum: 
+    name: httpd
+    state: installed
+
+- name: copying document root
+  copy:
+    src: index.html
+    dest: /var/www/html
+
+- name: copying config files 
+  template:
+    src: webserver.conf
+    dest: /tmp
+ 
+- name: starting httpd
+  command: echo "restarting apache" 
+  notify:
+    - restart httpd
+
+- include: roles/mongodb/tasks/apache_user.yml

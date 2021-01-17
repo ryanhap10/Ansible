@@ -1,0 +1,12 @@
+---
+
+- name: opening port "80" 
+  firewalld:
+    service: "{{ http_port }}"
+    permanent: true 
+    state: enabled
+  
+- name: reloading firewalld
+  command: echo "reloading firewalld config" 
+  notify:
+    - reloading firewalld
